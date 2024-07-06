@@ -1,0 +1,33 @@
+.wave-body {
+  display: inline-flex;
+  justify-content: space-between;
+  background: transparent;
+  width: 15px;
+  height: 14px;
+  transition: all 0.3s ease linear;
+  transform: rotate(180deg);
+}
+
+.wave1,
+.wave2,
+.wave3,
+.wave4,
+.wave5 {
+  width: 2px;
+  height: 12px;
+  background: #61dafb;
+  animation: upDown 1s linear infinite;
+  animation-delay: calc(var(--i) * -0.25s);
+}
+
+@keyframes upDown {
+  0% {
+    height: 3px;
+  }
+  50% {
+    height: 12px;
+  }
+  100% {
+    height: 3px;
+  }
+}

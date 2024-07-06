@@ -1,0 +1,50 @@
+.controls-container {
+  justify-content: space-between;
+  align-items: center;
+  width: 65%;
+  margin: 0;
+  padding: 0;
+}
+
+.action-btn {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.action-btn > * {
+  transition: all 0.2s ease-in-out;
+}
+
+.action-btn:hover > * {
+  transform: scale(1.1);
+}
+
+.play-pause-btn {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  box-shadow: -4px -4px 10px 0px #023a32 inset, 4px 4px 10px 1px #4defda inset;
+  background-color: #0ec2aa;
+}
+
+.play-pause-btn:hover {
+  transform: scale(1.1);
+}
+
+.play-pause-btn.active {
+  box-shadow: -4px -4px 10px 0px #14d6bc inset, 4px 4px 10px 1px #07574c inset;
+}
+
+@media (max-width: 768px) {
+  .controls-container {
+    width: 100%;
+  }
+}

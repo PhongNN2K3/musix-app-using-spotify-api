@@ -1,0 +1,25 @@
+.screen-container {
+  height: 100%;
+  width: calc(100% - 100px);
+  background-color: #141c28;
+  border-radius: 30px;
+  background-color: #131326;
+  opacity: 1;
+  background: linear-gradient(135deg, #14173855 25%, transparent 25%) -25px 0/
+      50px 50px,
+    linear-gradient(225deg, #141738 25%, transparent 25%) -25px 0/ 50px 50px,
+    linear-gradient(315deg, #14173855 25%, transparent 25%) 0px 0/ 50px 50px,
+    linear-gradient(45deg, #141738 25%, #131326 25%) 0px 0/ 50px 50px;
+}
+
+.flex {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .screen-container {
+    border-radius: 0;
+    display: flex;
+    flex: 1 1 100%;
+  }
+}

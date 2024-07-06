@@ -1,0 +1,49 @@
+.sidebar-body {
+  width: 40%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0cb8a1;
+  z-index: 9000;
+  transform: translateX(-100%);
+}
+
+.sidebar-body.active {
+  animation: slide-in 0.3s ease-in-out forwards;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.avatar {
+  margin: 0;
+}
+
+.close-btn {
+  position: fixed;
+  top: 50%;
+  right: 30%;
+  font-size: 36px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  color: #defbf7;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(43, 42, 42, 0.6);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

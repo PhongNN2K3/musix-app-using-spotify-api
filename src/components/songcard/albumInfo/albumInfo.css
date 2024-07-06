@@ -1,0 +1,46 @@
+.album-info {
+  width: 80%;
+}
+.album-info-name-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+@keyframes slip {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.album-info-name {
+  font-size: 24px;
+  font-weight: 500;
+  display: inline-block;
+  white-space: nowrap;
+  color: #d2ebe7;
+  animation: slip 10s linear infinite;
+  padding-left: 100%;
+}
+
+.album-info-artist {
+  font-size: 12px;
+  color: #bdcac8;
+}
+
+.album-info-release-date {
+  font-size: 12px;
+  color: #bdcac8;
+  margin-top: 10px;
+}
+
+.album-info p {
+  margin: 3px auto !important;
+}
+
+.album-info {
+  margin-top: 20px;
+  max-width: 90%;
+}
