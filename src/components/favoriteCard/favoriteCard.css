@@ -1,0 +1,84 @@
+.track-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+}
+
+.track-card-image {
+  border-radius: 30px;
+}
+
+.track-btn {
+  cursor: pointer;
+  z-index: 1000;
+  border-radius: 50%;
+  order: 3;
+}
+
+.play {
+  opacity: 0;
+}
+
+.track-card:hover .play {
+  opacity: 1;
+}
+
+.track-card:hover .track-card-fade {
+  opacity: 1;
+}
+
+.track-card-fade {
+  background: rgb(20, 28, 40);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 28, 40, 0.01) 0%,
+    rgba(158, 158, 158, 0.5) 100%
+  );
+  border-radius: 10px;
+  width: 100%;
+  height: 88%;
+  opacity: 0;
+  transition: all 0.25s ease;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  border-radius: 30px;
+  z-index: 1;
+}
+
+.track-btn-container {
+  width: auto;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  z-index: 10;
+  height: 42%;
+}
+
+.track-dropdown {
+  opacity: 0;
+  order: 2;
+}
+
+.track-card:hover .track-dropdown {
+  opacity: 1;
+}
+
+.like-btn {
+  cursor: pointer;
+  opacity: 0;
+  order: 1;
+}
+
+.track-card:hover .like-btn {
+  opacity: 1;
+}

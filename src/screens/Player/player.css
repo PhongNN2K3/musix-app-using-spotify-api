@@ -23,10 +23,15 @@
   .screen-container::-webkit-scrollbar {
     display: none;
   }
+
+  .left-player-container {
+    padding-top: 5%;
+  }
+
   .left-player-container,
   .right-player-container {
     width: 100%;
-    height: 92%;
+    height: 100%;
     margin: auto 0;
   }
   .right-player-container {

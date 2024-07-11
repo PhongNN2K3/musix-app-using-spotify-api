@@ -1,12 +1,6 @@
 import PlayingState from "../playingState/PlayingState";
 import "./queue.css";
-const Queue = ({
-  tracks,
-  currentIndex,
-  setCurrentIndex,
-  setChangedIndex,
-  wave,
-}) => {
+const Queue = ({ tracks, currentIndex, setCurrentIndex, wave }) => {
   const changeTimer = (duration) => {
     const min = Math.floor(duration / 1000 / 60);
     const sec = Math.floor((duration / 1000) % 60);
@@ -20,10 +14,7 @@ const Queue = ({
         <div className="queue-list">
           {tracks.map((track, index) => (
             <div
-              onClick={() => {
-                setChangedIndex(index);
-                setCurrentIndex(index);
-              }}
+              onClick={() => setCurrentIndex(index)}
               className={
                 currentIndex === index
                   ? "queue-item active flex"

@@ -1,0 +1,15 @@
+.favorite-screen {
+  overflow-y: auto;
+}
+
+.favorite-title {
+  color: #d2ebe7;
+  margin: 2%;
+}
+
+@media (max-width: 768px) {
+  .favorite-title {
+    text-align: center;
+    margin-top: 20px;
+  }
+}

@@ -1,8 +1,8 @@
 import Avatar from "avatar-initials";
 import { useEffect, useState } from "react";
-import { FaGripfire, FaPlay, FaSignOutAlt } from "react-icons/fa";
+import { FaGripfire, FaPlay, FaSearch, FaSignOutAlt } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
-import { MdFavorite, MdSpaceDashboard } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
 import apiClient from "../../spotify";
 import "./sidebar.css";
 import SidebarButton from "./SidebarButton";
@@ -33,7 +33,7 @@ const Sidebar = ({ setIsAuthenticated }) => {
     <div className="sidebar-container">
       <img src={avatar} className="avatar" alt="avatar" />
       <div>
-        <SidebarButton title="Feed" to="/feed" icon={<MdSpaceDashboard />} />
+        <SidebarButton title="Search" to="/search" icon={<FaSearch />} />
         <SidebarButton title="Trending" to="/trending" icon={<FaGripfire />} />
         <SidebarButton title="Player" to="/player" icon={<FaPlay />} />
         <SidebarButton title="Favorite" to="/favorite" icon={<MdFavorite />} />

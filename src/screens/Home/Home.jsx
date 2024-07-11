@@ -5,10 +5,10 @@ import { MenuIcon, MobileSidebar, Sidebar } from "../../components";
 import refreshToken from "../../refreshToken";
 import {
   Favorite,
-  Feed,
   Library,
   Login,
   Player,
+  Search,
   Trending,
 } from "../../screens";
 import { clientId, clientSecret, redirectUri } from "../../spotify";
@@ -89,6 +89,7 @@ const Home = () => {
     };
 
     window.addEventListener("resize", handleResize);
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -121,7 +122,7 @@ const Home = () => {
         )}
         <Routes>
           <Route path="/" element={<Library />} />
-          <Route path="/feed" element={<Feed />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/player" element={<Player />} />
           <Route path="/favorite" element={<Favorite />} />

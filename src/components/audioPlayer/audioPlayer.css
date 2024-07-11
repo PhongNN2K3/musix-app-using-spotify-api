@@ -44,9 +44,12 @@
 .song-duration {
   justify-content: space-between;
   align-items: center;
-  text-align: center;
   width: 50%;
   margin-bottom: 20px;
+}
+
+.song-duration > * {
+  margin: 0;
 }
 
 .duration {
@@ -55,7 +58,7 @@
   font-weight: 300;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .audio-player-container {
     display: flex;
     flex-wrap: wrap;
@@ -76,5 +79,11 @@
   }
   .song-duration > p {
     margin: 0 8px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .song-duration {
+    width: 80%;
   }
 }

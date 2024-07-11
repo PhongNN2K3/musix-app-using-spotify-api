@@ -28,6 +28,7 @@ const MobileSidebar = ({ isOpened, setIsOpened, setIsAuthenticated }) => {
     window.localStorage.removeItem("expires_at");
     setIsAuthenticated(false);
     window.location.reload();
+    setIsOpened(false);
   };
 
   return (

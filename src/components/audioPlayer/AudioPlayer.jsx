@@ -9,13 +9,11 @@ const AudioPlayer = ({
   currentIndex,
   setCurrentIndex,
   total,
-  changedIndex,
-  setChangedIndex,
   setWave,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
-  var audioSrc = total[currentIndex]?.track?.preview_url;
+  let audioSrc = total[currentIndex]?.track?.preview_url;
   const audioRef = useRef(new Audio(total[0]?.track?.preview_url));
   const intervalRef = useRef();
   const isReady = useRef(false);
@@ -71,7 +69,7 @@ const AudioPlayer = ({
         audioRef.current.pause();
       }
     }
-  }, [isPlaying, changedIndex]);
+  }, [isPlaying]);
 
   //khi index thay đổi dẫn đến src thay đổi sẽ thay đổi trạng thái cho bài hát tiếp theo thành sẵn sàng phát.
   //khi index thay đổi do đã hết thời gian phát hay đổi bài hát, đầu tiên sẽ kiểm tra có phải trong trạng thái phát lặp lại không.
@@ -81,6 +79,9 @@ const AudioPlayer = ({
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
     setTrackProgress(audioRef.current.currentTime);
+    if (isShuffled) {
+      countRef.current = shuffledIndices.current.indexOf(currentIndex);
+    }
 
     if (isRepeated) {
       if (isReady.current) {
@@ -101,16 +102,6 @@ const AudioPlayer = ({
     }
   }, [currentIndex]);
 
-  //xử lý việc bất ngờ thay đổi bài hát khi đang phát ngẫu nhiên, sau khi đã phát xong bài hát đã đổi thì chuyển sang bài hát tiếp theo
-  //trong danh sách trộn
-  useEffect(() => {
-    if (changedIndex.current) {
-      countRef.current = changedIndex.current;
-      setCurrentIndex(shuffledIndices.current[countRef.current]);
-      setChangedIndex(0);
-    }
-  }, [changedIndex]);
-
   //cleanup function
   useEffect(() => {
     return () => {
@@ -119,7 +110,6 @@ const AudioPlayer = ({
       isReady.current = false;
       setIsRepeated(false);
       setIsShuffled(false);
-      setChangedIndex(0);
     };
   }, []);
 

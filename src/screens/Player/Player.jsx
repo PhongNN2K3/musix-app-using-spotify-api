@@ -9,7 +9,6 @@ const Player = () => {
   const [tracks, setTracks] = useState([]);
   const [currentTrack, setCurrentTrack] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [changedIndex, setChangedIndex] = useState(0);
   const [wave, setWave] = useState(false);
 
   useEffect(() => {
@@ -39,8 +38,6 @@ const Player = () => {
           total={tracks}
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
-          changedIndex={changedIndex}
-          setChangedIndex={setChangedIndex}
           setWave={setWave}
         />
         <Widgets artistID={currentTrack?.album?.artists[0]?.id} />
@@ -50,7 +47,6 @@ const Player = () => {
         <Queue
           tracks={tracks}
           setCurrentIndex={setCurrentIndex}
-          setChangedIndex={setChangedIndex}
           currentIndex={currentIndex}
           wave={wave}
         />

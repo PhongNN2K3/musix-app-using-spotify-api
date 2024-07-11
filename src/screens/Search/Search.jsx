@@ -1,38 +1,18 @@
-import { memo, useEffect, useRef, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import FavoriteCard from "../../components/favoriteCard/FavoriteCard";
+import { useEffect, useRef, useState } from "react";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import TrackCard from "../../components/trackCard/TrackCard";
 import apiClient from "../../spotify";
-import "./favorite.css";
+import "./search.css";
 
-const Favorite = () => {
-  const [likedPlaylists, setLikedPlaylists] = useState([]);
+const Search = () => {
+  const [searchInput, setSearchInput] = useState("");
+  const [tracks, setTracks] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  var audioSrc = likedPlaylists[currentIndex]?.track?.preview_url;
-  const audioRef = useRef(new Audio(likedPlaylists[0]?.track?.preview_url));
+  var audioSrc = tracks[currentIndex]?.preview_url;
+  const audioRef = useRef(new Audio(tracks[0]?.preview_url));
   const intervalRef = useRef();
   const isReady = useRef(false);
-
-  useEffect(() => {
-    try {
-      apiClient
-        .get("/me/tracks")
-        .then((response) => {
-          setLikedPlaylists(response.data.items);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  const handleRemoveTrack = (trackId) => {
-    setLikedPlaylists((prevPlaylists) =>
-      prevPlaylists.filter((playlist) => playlist.track.id !== trackId)
-    );
-  };
 
   const startTimer = () => {
     clearInterval(intervalRef.current);
@@ -42,6 +22,8 @@ const Favorite = () => {
       }
     }, 1000);
   };
+
+  console.log("render");
 
   useEffect(() => {
     if (audioRef.current.src) {
@@ -78,13 +60,35 @@ const Favorite = () => {
   }, [currentIndex]);
 
   const handleNext = () => {
-    if (currentIndex < likedPlaylists.length - 1) {
+    if (currentIndex < tracks.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
       setIsPlaying(false);
     }
   };
+
+  useEffect(() => {
+    apiClient
+      .get("/search", {
+        params: {
+          q: searchInput,
+          type: "track",
+        },
+      })
+      .then((response) => {
+        setTracks(response.data.tracks.items);
+      })
+      .catch((err) => console.log(err));
+    console.log("render");
+  }, [searchInput]);
+
+  useEffect(() => {
+    if (!searchInput) {
+      setTracks([]);
+      setIsPlaying(false);
+    }
+  }, [searchInput]);
 
   useEffect(() => {
     return () => {
@@ -97,25 +101,34 @@ const Favorite = () => {
   }, []);
 
   return (
-    <div className="screen-container favorite-screen">
-      <div className="favorite-title">
-        <h1>My Favorite songs</h1>
+    <div className="screen-container search-body">
+      <div className="search-bar">
+        <Form onSubmit={async (e) => e.preventDefault()}>
+          <Form.Group className="m-5" controlId="search">
+            <Form.Control
+              type="text"
+              placeholder="Please enter an artist or a song's name for searching songs"
+              onChange={(e) => setSearchInput(e.target.value)}
+              value={searchInput}
+            />
+          </Form.Group>
+        </Form>
       </div>
-      {likedPlaylists.length > 0 && (
-        <div className="favorite-body">
+      {tracks.length > 0 && (
+        <div className="search-screen-body">
           <Container>
             <Row className="m-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
-              {likedPlaylists.map((track, index) => {
+              {tracks.map((track, index) => {
                 return (
                   <Col className="my-3" key={index}>
-                    <FavoriteCard
-                      track={track.track}
+                    <TrackCard
+                      track={track}
                       isPlaying={isPlaying}
                       setIsPlaying={setIsPlaying}
                       index={index}
                       currentIndex={currentIndex}
                       setCurrentIndex={setCurrentIndex}
-                      handleRemoveTrack={handleRemoveTrack}
+                      tracks={tracks}
                     />
                   </Col>
                 );
@@ -128,4 +141,4 @@ const Favorite = () => {
   );
 };
 
-export default memo(Favorite);
+export default Search;
