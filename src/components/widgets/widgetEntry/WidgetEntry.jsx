@@ -1,6 +1,7 @@
 import "./widgetEntry.css";
 
 const WidgetEntry = ({ title, subtitle, image }) => {
+  //từng related artist, playlist nổi bật, album mới nhất trong widget card
   return (
     <div className="widget-entry-body flex">
       <img className="widget-entry-img" src={image} alt={title} />

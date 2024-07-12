@@ -13,6 +13,7 @@ const scopes = [
   "playlist-modify-private",
   "user-library-read",
   "user-library-modify",
+  "ugc-image-upload",
 ];
 
 export const loginEndpoint = `${authEndpoint}?client_id=${clientId}&redirect_uri=${encodeURIComponent(

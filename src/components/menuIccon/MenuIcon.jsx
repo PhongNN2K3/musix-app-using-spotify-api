@@ -3,6 +3,7 @@ import { HiMenuAlt2 } from "react-icons/hi";
 import "./menuIcon.css";
 
 const MenuIcon = ({ setIsOpened, isOpened }) => {
+  //menu icon ở mỗi thẻ bài hát ở màn hình search và favorite
   return (
     <IconContext.Provider value={{ size: "36px", color: "#d2ebe7" }}>
       <div

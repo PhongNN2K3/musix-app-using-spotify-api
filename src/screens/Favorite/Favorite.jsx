@@ -13,6 +13,7 @@ const Favorite = () => {
   const intervalRef = useRef();
   const isReady = useRef(false);
 
+  //lấy bái hát từ liked playlist ở Spotify
   useEffect(() => {
     try {
       apiClient
@@ -28,12 +29,14 @@ const Favorite = () => {
     }
   }, []);
 
+  //hàm xóa bái hát ở UI
   const handleRemoveTrack = (trackId) => {
     setLikedPlaylists((prevPlaylists) =>
       prevPlaylists.filter((playlist) => playlist.track.id !== trackId)
     );
   };
 
+  //đặt interval để phát cho đối hết
   const startTimer = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
@@ -43,6 +46,7 @@ const Favorite = () => {
     }, 1000);
   };
 
+  //phát/dừng một khi click nút play/pause
   useEffect(() => {
     if (audioRef.current.src) {
       if (isPlaying) {
@@ -64,6 +68,7 @@ const Favorite = () => {
     }
   }, [isPlaying]);
 
+  //phát bài hát một khi chọn bài hát
   useEffect(() => {
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
@@ -77,6 +82,7 @@ const Favorite = () => {
     }
   }, [currentIndex]);
 
+  //phát bài tiếp theo
   const handleNext = () => {
     if (currentIndex < likedPlaylists.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -86,6 +92,7 @@ const Favorite = () => {
     }
   };
 
+  //cleanup function
   useEffect(() => {
     return () => {
       clearInterval(intervalRef.current);

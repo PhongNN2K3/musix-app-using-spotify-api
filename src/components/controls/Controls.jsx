@@ -14,6 +14,10 @@ const Controls = ({
   isShuffled,
   setIsShuffled,
 }) => {
+  /**
+   * controls của audioPlayer.jsx
+   * bao gồm nút backward, play, pause, forward, repeat
+   */
   return (
     <IconContext.Provider value={{ size: "40px", color: "#C4D0E3" }}>
       <div className="controls-container flex">

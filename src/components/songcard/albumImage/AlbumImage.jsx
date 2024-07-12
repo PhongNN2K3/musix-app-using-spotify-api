@@ -1,6 +1,7 @@
 import "./albumImage.css";
 
 const AlbumImage = ({ img }) => {
+  //hình ảnh album bài hát đang phát
   return (
     <div className="album-image flex">
       <img src={img} alt="" />

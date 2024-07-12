@@ -16,6 +16,7 @@ const TrackCard = ({
 }) => {
   const artists = track.artists.map((artist) => artist.name).join(", ");
 
+  //thẻ bài hát khi người dùng search sẽ xuất hiện
   return (
     <Card className="track-card bg-dark text-white">
       <Card.Img

@@ -7,6 +7,7 @@ const Queue = ({ tracks, currentIndex, setCurrentIndex, wave }) => {
     return (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
   };
 
+  //queue các bài hát của playlist dưới góc phải màn hình
   return (
     <div className="queue-container flex">
       <div className="queue flex">

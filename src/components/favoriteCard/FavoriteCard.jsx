@@ -16,6 +16,7 @@ const FavoriteCard = ({
   handleRemoveTrack,
 }) => {
   const artists = track.artists.map((artist) => artist.name).join(", ");
+  //thẻ bài hát ở màn hình favorite
   return (
     <Card className="track-card bg-dark text-white">
       <Card.Img

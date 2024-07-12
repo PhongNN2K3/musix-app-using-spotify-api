@@ -4,6 +4,7 @@ const SidebarButton = (props) => {
   let location = useLocation();
   let isActive =
     location.pathname === props.to ? "btn-container active" : "btn-container";
+  //nút trên sidebar và link đến mỗi màn hình
   return (
     <div>
       <Link to={props.to}>

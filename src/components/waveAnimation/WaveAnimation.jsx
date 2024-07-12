@@ -3,6 +3,7 @@ import "./waveAnimation.css";
 const WaveAnimation = ({ isPlaying }) => {
   const waveClass = isPlaying ? "box active" : "box";
 
+  //animation cho biết bài hát đang phát/dừng
   return (
     <div className="box-container flex">
       <div className={`${waveClass} box1`}></div>

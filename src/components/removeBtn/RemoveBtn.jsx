@@ -14,10 +14,12 @@ const RemoveBtn = ({ trackID, handleRemoveTrack }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const ref = useRef(true);
 
+  //bấm bên ngoài thu lại dropdown
   useClickAway(ref, () => {
     setShowDropdown(false);
   });
 
+  //add track vào danh sách playlist ở dropdown
   useEffect(() => {
     if (selectedPlaylistID) {
       try {
@@ -32,6 +34,7 @@ const RemoveBtn = ({ trackID, handleRemoveTrack }) => {
     }
   }, [selectedPlaylistID]);
 
+  //xóa bài hát khỏi liked playlist
   useEffect(() => {
     if (isSaved) {
       try {

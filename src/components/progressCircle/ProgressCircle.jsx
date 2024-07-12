@@ -20,6 +20,7 @@ const Circle = ({ size, color, percentage, strokeWidth }) => {
   );
 };
 
+//đường tròn theo dõi tiến trình bài hát
 const ProgressCircle = ({ size, color, percentage, isPlaying, image }) => {
   return (
     <div className="progress-circle-container flex">

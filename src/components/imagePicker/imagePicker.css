@@ -1,0 +1,32 @@
+.image-picker {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: transparent;
+}
+
+.image-picker-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image-picker-button {
+  width: 86%;
+  background-color: #00bfa5;
+  color: white;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.image-picker:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.image-picker .card-img-top {
+  transition: transform 0.3s ease;
+}

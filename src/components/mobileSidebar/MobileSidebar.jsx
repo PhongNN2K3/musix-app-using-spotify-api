@@ -11,6 +11,7 @@ import "./mobileSidebar.css";
 const MobileSidebar = ({ isOpened, setIsOpened, setIsAuthenticated }) => {
   const [avatar, setAvatar] = useState(placeholder);
 
+  //lấy avatar người đăng nhập
   useEffect(() => {
     apiClient
       .get("/me")
@@ -22,6 +23,7 @@ const MobileSidebar = ({ isOpened, setIsOpened, setIsAuthenticated }) => {
       .catch((err) => console.log(err));
   }, []);
 
+  //đăng xuất
   const handleSignOut = () => {
     window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("refresh_token");

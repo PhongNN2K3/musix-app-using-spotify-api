@@ -8,6 +8,7 @@ const Widgets = ({ artistID }) => {
   const [featured, setFeatured] = useState([]);
   const [newReleases, setNewReleases] = useState([]);
 
+  //lấy nghệ sĩ liên quan
   useEffect(() => {
     apiClient
       .get(`/artists/${artistID}/related-artists`)
@@ -19,6 +20,7 @@ const Widgets = ({ artistID }) => {
         console.log(err);
       });
 
+    //lấy playlist nổi bật
     apiClient
       .get("/browse/featured-playlists")
       .then((response) => {
@@ -29,6 +31,7 @@ const Widgets = ({ artistID }) => {
         console.log(err);
       });
 
+    //lấy album mới nhất
     apiClient
       .get("/browse/new-releases")
       .then((response) => {

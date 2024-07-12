@@ -11,6 +11,7 @@ const Player = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [wave, setWave] = useState(false);
 
+  //lấy tracks từ id playlist đã lưu
   useEffect(() => {
     apiClient
       .get(

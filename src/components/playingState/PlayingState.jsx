@@ -1,6 +1,7 @@
 import "./playingState.css";
 
 const PlayingState = () => {
+  //animation cho biết bài hát nào đang phát trong queue
   return (
     <div className="wave-body">
       <div className="wave1" style={{ "--i": 1 }}></div>

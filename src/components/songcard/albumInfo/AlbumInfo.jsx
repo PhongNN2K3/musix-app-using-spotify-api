@@ -17,6 +17,7 @@ const AlbumInfo = ({ album }) => {
     artists.push(artist?.name);
   });
 
+  //thông tin bài hát đang phát
   return (
     <div className="album-info">
       <div className="album-info-name-container">

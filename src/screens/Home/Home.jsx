@@ -3,14 +3,7 @@ import { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { MenuIcon, MobileSidebar, Sidebar } from "../../components";
 import refreshToken from "../../refreshToken";
-import {
-  Favorite,
-  Library,
-  Login,
-  Player,
-  Search,
-  Trending,
-} from "../../screens";
+import { Favorite, Library, Login, Player, Search } from "../../screens";
 import { clientId, clientSecret, redirectUri } from "../../spotify";
 import "./home.css";
 
@@ -83,6 +76,7 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
+  //kiểm tra kích thước trình duyệt khi thay đổi
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -96,6 +90,7 @@ const Home = () => {
     };
   });
 
+  //thay đổi trạng thái sidebar khi kích thước trình duyệt thay đổi
   useEffect(() => {
     if (window.innerWidth >= 768) {
       setIsOpened(false);
@@ -123,7 +118,6 @@ const Home = () => {
         <Routes>
           <Route path="/" element={<Library />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/trending" element={<Trending />} />
           <Route path="/player" element={<Player />} />
           <Route path="/favorite" element={<Favorite />} />
         </Routes>

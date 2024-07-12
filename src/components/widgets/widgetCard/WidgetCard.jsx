@@ -4,6 +4,7 @@ import WidgetEntry from "../widgetEntry/WidgetEntry";
 import "./widgetCard.css";
 
 const WidgetCard = ({ title, similar, featured, newReleases }) => {
+  //các khung related artist, playlist nổi bật, album mới nhất dưới khung audio
   return (
     <div className="widget-card-container">
       <p className="widget-title">{title}</p>

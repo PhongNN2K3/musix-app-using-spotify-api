@@ -14,6 +14,7 @@ const Search = () => {
   const intervalRef = useRef();
   const isReady = useRef(false);
 
+  //đặt interval để phát cho đến hết
   const startTimer = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
@@ -23,8 +24,7 @@ const Search = () => {
     }, 1000);
   };
 
-  console.log("render");
-
+  //phát/dừng mỗi khi click nút play/pause
   useEffect(() => {
     if (audioRef.current.src) {
       if (isPlaying) {
@@ -46,6 +46,7 @@ const Search = () => {
     }
   }, [isPlaying]);
 
+  //phát mỗi khi bài hát thay đổi
   useEffect(() => {
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
@@ -59,6 +60,7 @@ const Search = () => {
     }
   }, [currentIndex]);
 
+  //chuyển bài hát tiếp theo
   const handleNext = () => {
     if (currentIndex < tracks.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -68,6 +70,7 @@ const Search = () => {
     }
   };
 
+  //chức năng search bài hát theo tên bài hát hoặc tên nghệ sĩ
   useEffect(() => {
     apiClient
       .get("/search", {
@@ -83,6 +86,7 @@ const Search = () => {
     console.log("render");
   }, [searchInput]);
 
+  //xóa màn hình search khi input rỗng
   useEffect(() => {
     if (!searchInput) {
       setTracks([]);
@@ -90,6 +94,7 @@ const Search = () => {
     }
   }, [searchInput]);
 
+  //cleanup function
   useEffect(() => {
     return () => {
       clearInterval(intervalRef.current);
