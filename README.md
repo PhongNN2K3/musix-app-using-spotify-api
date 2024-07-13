@@ -1,8 +1,7 @@
-# React + Vite
+# To run the demo of this project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Firstly, please change your current Google account with this one: worldserpent444@gmail.com - password: @accountfortest
 
-Currently, two official plugins are available:
+Secondly, go to [https://musix-appp.netlify.app](url) and use the above account to log in to this website. Please note that logging in does not require a password
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Due to copyright restrictions, you can only play preview audio clips that last approximately 30 seconds (some of which may be empty).
