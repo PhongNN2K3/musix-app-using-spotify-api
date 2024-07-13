@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { FaPlay, FaSearch, FaSignOutAlt } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
 import { MdFavorite } from "react-icons/md";
+import { SidebarButton } from "../../components";
 import apiClient from "../../spotify";
 import "./sidebar.css";
-import SidebarButton from "./SidebarButton";
 
 const Sidebar = ({ setIsAuthenticated }) => {
   const [avatar, setAvatar] = useState();

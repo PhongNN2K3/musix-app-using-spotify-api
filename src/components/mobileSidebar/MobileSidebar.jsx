@@ -1,11 +1,11 @@
 import Avatar from "avatar-initials";
 import { useEffect, useState } from "react";
-import { FaGripfire, FaPlay, FaSignOutAlt, FaTimes } from "react-icons/fa";
+import { FaPlay, FaSearch, FaSignOutAlt, FaTimes } from "react-icons/fa";
 import { IoLibrary } from "react-icons/io5";
-import { MdFavorite, MdSpaceDashboard } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
 import placeholder from "../../../public/person.png";
+import { SidebarButton } from "../../components";
 import apiClient from "../../spotify";
-import SidebarButton from "../sidebar/SidebarButton";
 import "./mobileSidebar.css";
 
 const MobileSidebar = ({ isOpened, setIsOpened, setIsAuthenticated }) => {
@@ -43,12 +43,7 @@ const MobileSidebar = ({ isOpened, setIsOpened, setIsAuthenticated }) => {
         </div>
 
         <div className="sidebar-mid">
-          <SidebarButton title="Feed" to="/feed" icon={<MdSpaceDashboard />} />
-          <SidebarButton
-            title="Trending"
-            to="/trending"
-            icon={<FaGripfire />}
-          />
+          <SidebarButton title="Search" to="/search" icon={<FaSearch />} />
           <SidebarButton title="Player" to="/player" icon={<FaPlay />} />
           <SidebarButton
             title="Favorite"

@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { AudioPlayer, Queue, SongCard, Widgets } from "../../components";
+import { AudioPlayer, PlaylistInfo, Queue, SongCard } from "../../components";
 import apiClient from "../../spotify";
 import "./player.css";
 
@@ -10,6 +10,13 @@ const Player = () => {
   const [currentTrack, setCurrentTrack] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const [wave, setWave] = useState(false);
+  const currentPlaylist = JSON.parse(
+    window.localStorage.getItem("playlists")
+  ).find(
+    (playlist) =>
+      playlist.id ===
+      (location.state?.playlistId ?? window.localStorage.getItem("playlistId"))
+  );
 
   //lấy tracks từ id playlist đã lưu
   useEffect(() => {
@@ -31,9 +38,16 @@ const Player = () => {
     setCurrentTrack(tracks[currentIndex]?.track);
   }, [currentIndex, tracks]);
 
+  const handleRemoveTrack = (currentTrackID) => {
+    setTracks((preTracks) =>
+      preTracks.filter((track) => track.track.id !== currentTrackID)
+    );
+  };
+
   return (
     <div className="screen-container flex">
       <div className="left-player-container">
+        <PlaylistInfo currentPlaylist={currentPlaylist} />
         <AudioPlayer
           currentTrack={currentTrack}
           total={tracks}
@@ -41,7 +55,6 @@ const Player = () => {
           setCurrentIndex={setCurrentIndex}
           setWave={setWave}
         />
-        <Widgets artistID={currentTrack?.album?.artists[0]?.id} />
       </div>
       <div className="right-player-container">
         <SongCard album={currentTrack} />
@@ -50,6 +63,7 @@ const Player = () => {
           setCurrentIndex={setCurrentIndex}
           currentIndex={currentIndex}
           wave={wave}
+          handleRemoveTrack={handleRemoveTrack}
         />
       </div>
     </div>

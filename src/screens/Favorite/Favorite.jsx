@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import FavoriteCard from "../../components/favoriteCard/FavoriteCard";
+import { FavoriteCard } from "../../components";
 import apiClient from "../../spotify";
 import "./favorite.css";
 
@@ -72,6 +72,7 @@ const Favorite = () => {
   useEffect(() => {
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
+    audioRef.current.load();
 
     if (isReady.current) {
       audioRef.current.play();
@@ -100,6 +101,7 @@ const Favorite = () => {
       setCurrentIndex(0);
       setIsPlaying(false);
       isReady.current = false;
+      audioRef.current.src = null;
     };
   }, []);
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import TrackCard from "../../components/trackCard/TrackCard";
+import { TrackCard } from "../../components";
 import apiClient from "../../spotify";
 import "./search.css";
 
@@ -50,6 +50,7 @@ const Search = () => {
   useEffect(() => {
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
+    audioRef.current.load();
 
     if (isReady.current) {
       audioRef.current.play();
@@ -71,20 +72,21 @@ const Search = () => {
   };
 
   //chức năng search bài hát theo tên bài hát hoặc tên nghệ sĩ
-  useEffect(() => {
-    apiClient
-      .get("/search", {
+  const handleSearch = async () => {
+    if (searchInput.trim() === "") return;
+
+    try {
+      const response = await apiClient.get("/search", {
         params: {
-          q: searchInput,
+          q: searchInput.trim(),
           type: "track",
         },
-      })
-      .then((response) => {
-        setTracks(response.data.tracks.items);
-      })
-      .catch((err) => console.log(err));
-    console.log("render");
-  }, [searchInput]);
+      });
+      setTracks(response.data.tracks.items);
+    } catch (err) {
+      console.error("Error during search request:", err);
+    }
+  };
 
   //xóa màn hình search khi input rỗng
   useEffect(() => {
@@ -102,24 +104,37 @@ const Search = () => {
       setCurrentIndex(0);
       setIsPlaying(false);
       isReady.current = false;
+      setSearchInput("");
+      setTracks([]);
+      audioRef.current.src = "";
     };
   }, []);
 
   return (
     <div className="screen-container search-body">
       <div className="search-bar">
-        <Form onSubmit={async (e) => e.preventDefault()}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}
+        >
           <Form.Group className="m-5" controlId="search">
             <Form.Control
               type="text"
               placeholder="Please enter an artist or a song's name for searching songs"
               onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
             />
           </Form.Group>
         </Form>
       </div>
-      {tracks.length > 0 && (
+      {tracks.length > 0 ? (
         <div className="search-screen-body">
           <Container>
             <Row className="m-5 row-cols-1 row-cols-md-2 row-cols-lg-4">
@@ -141,6 +156,10 @@ const Search = () => {
             </Row>
           </Container>
         </div>
+      ) : (
+        <h1 style={{ textAlign: "center", color: "#DDF7F7" }}>
+          No songs found!
+        </h1>
       )}
     </div>
   );

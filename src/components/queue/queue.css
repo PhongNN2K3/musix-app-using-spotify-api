@@ -46,11 +46,18 @@
   display: none;
 }
 
+.queue-item-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .queue-item {
   width: 100%;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  position: relative;
 }
 
 .queue-item.active {
@@ -78,13 +85,13 @@
 .queue-item-title {
   width: 75%;
   height: 39px;
+  display: inline-block;
+  text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   line-clamp: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   display: flex;
   align-items: center;
 }

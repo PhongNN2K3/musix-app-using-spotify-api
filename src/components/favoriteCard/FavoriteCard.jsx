@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import { IconContext } from "react-icons";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { MdPauseCircle } from "react-icons/md";
-import RemoveBtn from "../removeBtn/RemoveBtn";
+import { RemoveBtn } from "../../components";
 import "./favoriteCard.css";
 
 const FavoriteCard = ({

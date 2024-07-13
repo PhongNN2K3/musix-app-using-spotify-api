@@ -16,5 +16,9 @@
   outline: none;
 }
 
-@media (max-width: 768px) {
+.text-muted {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #dff4f1 !important;
 }

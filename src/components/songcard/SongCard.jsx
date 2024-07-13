@@ -1,5 +1,4 @@
-import AlbumImage from "./albumImage/AlbumImage";
-import AlbumInfo from "./albumInfo/AlbumInfo";
+import { AlbumImage, AlbumInfo } from "../../components";
 import "./songcard.css";
 const SongCard = ({ album }) => {
   //hình ảnh thông tin bài hát đang phát

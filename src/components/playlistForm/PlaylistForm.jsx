@@ -11,6 +11,16 @@ const PlaylistForm = ({
   const [playlistName, setPlaylistName] = useState("");
   const [description, setDescription] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const maxLength = 300;
+
+  const handleChange = (e) => {
+    const input = e.target.value;
+    if (input.length > maxLength) {
+      setDescription(input.substring(0, maxLength));
+    } else {
+      setDescription(input);
+    }
+  };
 
   //hàm tạo playlist được kích hoạt khi click vào nút Create
   const handleSubmit = () => {
@@ -37,6 +47,7 @@ const PlaylistForm = ({
           value={playlistName}
           type="text"
           placeholder="My new playlist"
+          maxLength={100}
         />
       </Form.Group>
       {error && <Alert variant="danger">{error}</Alert>}
@@ -44,12 +55,18 @@ const PlaylistForm = ({
         <Form.Label>Description</Form.Label>
         <Form.Control
           style={{ resize: "none" }}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={handleChange}
           value={description}
           as="textarea"
           rows={5}
           placeholder="Enter something..."
+          maxLength={maxLength}
         />
+        <div className="text-muted">
+          <Form.Text muted>
+            {description.length}/{maxLength}
+          </Form.Text>
+        </div>
       </Form.Group>
       <div className="create-btn-container">
         <Form.Check

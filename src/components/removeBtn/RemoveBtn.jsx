@@ -4,10 +4,10 @@ import { IconContext } from "react-icons";
 import { CiMenuKebab } from "react-icons/ci";
 import { useClickAway } from "react-use";
 import apiClient from "../../spotify";
+import "./removeBtn.css";
 
 const RemoveBtn = ({ trackID, handleRemoveTrack }) => {
   const [currentTrackID, setCurrentTrackID] = useState("");
-  const [isSaved, setIsSaved] = useState(false);
   const [selectedPlaylistID, setSelectedPlaylistID] = useState("");
   let playlists = JSON.parse(window.localStorage.getItem("playlists"));
   const [showChildDropdown1, setShowChildDropdown1] = useState(false);
@@ -21,38 +21,52 @@ const RemoveBtn = ({ trackID, handleRemoveTrack }) => {
 
   //add track vào danh sách playlist ở dropdown
   useEffect(() => {
-    if (selectedPlaylistID) {
-      try {
-        apiClient.post(`/playlists/${selectedPlaylistID}/tracks`, {
-          uris: [`spotify:track:${currentTrackID}`],
-        });
-        setSelectedPlaylistID("");
-        setCurrentTrackID("");
-      } catch (error) {
-        console.error(error);
+    const addTrackToPlaylist = async () => {
+      if (selectedPlaylistID) {
+        try {
+          const response = await apiClient.get(
+            `/playlists/${selectedPlaylistID}/tracks`
+          );
+          const playlistTracks = response.data.items;
+
+          const isTrackInPlaylist = playlistTracks.some(
+            (item) => item.track.id === currentTrackID
+          );
+
+          if (isTrackInPlaylist) {
+            setSelectedPlaylistID("");
+            setCurrentTrackID("");
+            return;
+          }
+          apiClient.post(`/playlists/${selectedPlaylistID}/tracks`, {
+            uris: [`spotify:track:${currentTrackID}`],
+          });
+          setSelectedPlaylistID("");
+          setCurrentTrackID("");
+        } catch (error) {
+          console.error(error);
+        }
       }
-    }
-  }, [selectedPlaylistID]);
+    };
+
+    addTrackToPlaylist();
+  }, [selectedPlaylistID, currentTrackID]);
 
   //xóa bài hát khỏi liked playlist
-  useEffect(() => {
-    if (isSaved) {
-      try {
-        apiClient.delete("/me/tracks", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: { ids: [currentTrackID] },
-        });
-        setIsSaved(false);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
+  const removeTrack = (currentTrackID) => {
+    try {
+      apiClient.delete("/me/tracks", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: { ids: [currentTrackID] },
+      });
       handleRemoveTrack(currentTrackID);
       setCurrentTrackID("");
+    } catch (error) {
+      console.error(error);
     }
-  }, [isSaved]);
+  };
 
   return (
     <div ref={ref}>
@@ -73,7 +87,10 @@ const RemoveBtn = ({ trackID, handleRemoveTrack }) => {
           </IconContext.Provider>
         </Dropdown.Toggle>
         <Dropdown.Menu variant="dark" className="dropdown-menu">
-          <Dropdown.Item eventKey="1" onClick={() => setIsSaved(true)}>
+          <Dropdown.Item
+            eventKey="1"
+            onClick={() => removeTrack(currentTrackID)}
+          >
             Remove from favorite
           </Dropdown.Item>
           <Dropdown
@@ -84,22 +101,24 @@ const RemoveBtn = ({ trackID, handleRemoveTrack }) => {
           >
             Add to playlists
             {showChildDropdown1 && (
-              <Dropdown.Menu
-                align="start"
-                variant="dark"
-                className="dropdown-submenu"
-              >
-                {playlists?.map((playlist, index) => (
-                  <Dropdown.Item
-                    onClick={() => setSelectedPlaylistID(playlist.id)}
-                    eventKey={playlist.id}
-                    className="custom-dropdown-item"
-                    key={index}
-                  >
-                    {playlist.name}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
+              <div className="submenu">
+                <Dropdown.Menu
+                  align="start"
+                  variant="dark"
+                  className="submenu-body"
+                >
+                  {playlists?.map((playlist, index) => (
+                    <Dropdown.Item
+                      onClick={() => setSelectedPlaylistID(playlist.id)}
+                      eventKey={playlist.id}
+                      className="dropdown-items"
+                      key={index}
+                    >
+                      {playlist.name}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </div>
             )}
           </Dropdown>
         </Dropdown.Menu>

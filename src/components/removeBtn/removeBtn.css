@@ -1,40 +1,29 @@
-.dropdown-btn {
-  cursor: pointer;
-}
-
-.dropdown-btn::after {
-  display: none;
-}
-
-.dropdown-menu {
-  margin-top: 10px;
+.submenu {
+  position: relative;
   z-index: 100000;
 }
 
-.dropdown-submenu {
+.submenu-body {
   position: absolute;
   left: -210px;
   top: -140px;
   max-height: 200px;
   overflow-y: auto;
   width: 200px;
+  z-index: 9999;
 }
 
-.dropdown-submenu::-webkit-scrollbar {
+.submenu-body::-webkit-scrollbar {
   display: none;
 }
 
-.custom-dropdown-item {
+.dropdown-items {
   color: #fff;
   overflow: hidden;
-  display: --webkit-box;
+  display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   line-clamp: 1;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-.dropdown-submenu-container {
-  position: relative;
 }

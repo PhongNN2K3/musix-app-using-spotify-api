@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Controls from "../controls/Controls";
-import ProgressCircle from "../progressCircle/ProgressCircle";
-import WaveAnimation from "../waveAnimation/WaveAnimation";
+import { Controls, ProgressCircle, WaveAnimation } from "../../components";
 import "./audioPlayer.css";
 
 const AudioPlayer = ({
@@ -78,6 +76,7 @@ const AudioPlayer = ({
   useEffect(() => {
     audioRef.current.pause();
     audioRef.current = new Audio(audioSrc);
+    audioRef.current.load();
     setTrackProgress(audioRef.current.currentTime);
     if (isShuffled) {
       countRef.current = shuffledIndices.current.indexOf(currentIndex);
@@ -110,6 +109,7 @@ const AudioPlayer = ({
       isReady.current = false;
       setIsRepeated(false);
       setIsShuffled(false);
+      audioRef.current.src = null;
     };
   }, []);
 

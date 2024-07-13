@@ -1,6 +1,12 @@
-import PlayingState from "../playingState/PlayingState";
+import { PlayingState, TrackBtn } from "../../components";
 import "./queue.css";
-const Queue = ({ tracks, currentIndex, setCurrentIndex, wave }) => {
+const Queue = ({
+  tracks,
+  currentIndex,
+  setCurrentIndex,
+  wave,
+  handleRemoveTrack,
+}) => {
   const changeTimer = (duration) => {
     const min = Math.floor(duration / 1000 / 60);
     const sec = Math.floor((duration / 1000) % 60);
@@ -14,38 +20,44 @@ const Queue = ({ tracks, currentIndex, setCurrentIndex, wave }) => {
         <p className="queue-upNext">Up next</p>
         <div className="queue-list">
           {tracks.map((track, index) => (
-            <div
-              onClick={() => setCurrentIndex(index)}
-              className={
-                currentIndex === index
-                  ? "queue-item active flex"
-                  : "queue-item flex"
-              }
-              key={index}
-            >
-              <p className="queue-item-title">
-                {wave && currentIndex === index ? (
-                  <div className="wave-animation-container">
-                    <PlayingState />
-                    <p>{track.track.name}</p>
-                  </div>
-                ) : (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div style={{ margin: "0", width: "15px" }}>
-                      {index + 1 + ". "}
+            <div className="queue-item-container">
+              <div
+                onClick={() => setCurrentIndex(index)}
+                className={
+                  currentIndex === index
+                    ? "queue-item active flex"
+                    : "queue-item flex"
+                }
+                key={index}
+              >
+                <p className="queue-item-title">
+                  {wave && currentIndex === index ? (
+                    <div className="wave-animation-container">
+                      <PlayingState />
+                      <p>{track.track.name}</p>
                     </div>
-                    <p>{track.track.name}</p>
-                  </div>
-                )}
-              </p>
-              <p className="queue-item-duration">
-                {changeTimer(track.track.duration_ms)}
-              </p>
+                  ) : (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div style={{ margin: "0", width: "15px" }}>
+                        {index + 1 + ". "}
+                      </div>
+                      <p>{track.track.name}</p>
+                    </div>
+                  )}
+                </p>
+                <p className="queue-item-duration">
+                  {changeTimer(track.track.duration_ms)}
+                </p>
+              </div>
+              <TrackBtn
+                trackID={track.track.id}
+                handleRemoveTrack={handleRemoveTrack}
+              />
             </div>
           ))}
         </div>

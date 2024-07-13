@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import ImagePicker from "../../components/imagePicker/ImagePicker";
-import PlaylistForm from "../../components/playlistForm/PlaylistForm";
-import { default as apiClient, default as APIKit } from "../../spotify";
+import { ImagePicker, PlaylistForm } from "../../components";
+import apiClient from "../../spotify";
 import "./library.css";
 
 const Library = () => {
@@ -85,7 +84,8 @@ const Library = () => {
 
   //render playlists
   useEffect(() => {
-    APIKit.get("/me/playlists")
+    apiClient
+      .get("/me/playlists")
       .then((response) => {
         setPlaylists(response.data.items);
         window.localStorage.setItem(
@@ -118,7 +118,7 @@ const Library = () => {
                   src={
                     playlist?.images
                       ? playlist?.images[0]?.url
-                      : "../../../public/image-placeholder4.jpg"
+                      : "../../../placeholder.png"
                   }
                   alt=""
                 />
