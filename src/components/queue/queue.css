@@ -85,6 +85,11 @@
 .queue-item-title {
   width: 75%;
   height: 39px;
+  display: flex;
+  align-items: center;
+}
+
+.queue-item-title p {
   display: inline-block;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -92,8 +97,6 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   line-clamp: 1;
-  display: flex;
-  align-items: center;
 }
 
 .wave-animation-container {

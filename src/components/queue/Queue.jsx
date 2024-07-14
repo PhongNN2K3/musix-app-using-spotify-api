@@ -20,7 +20,7 @@ const Queue = ({
         <p className="queue-upNext">Up next</p>
         <div className="queue-list">
           {tracks.map((track, index) => (
-            <div className="queue-item-container">
+            <div className="queue-item-container" key={index}>
               <div
                 onClick={() => setCurrentIndex(index)}
                 className={
@@ -30,26 +30,21 @@ const Queue = ({
                 }
                 key={index}
               >
-                <p className="queue-item-title">
+                <div className="queue-item-title">
                   {wave && currentIndex === index ? (
                     <div className="wave-animation-container">
                       <PlayingState />
                       <p>{track.track.name}</p>
                     </div>
                   ) : (
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
+                    <div className="wave-animation-container">
                       <div style={{ margin: "0", width: "15px" }}>
                         {index + 1 + ". "}
                       </div>
                       <p>{track.track.name}</p>
                     </div>
                   )}
-                </p>
+                </div>
                 <p className="queue-item-duration">
                   {changeTimer(track.track.duration_ms)}
                 </p>
